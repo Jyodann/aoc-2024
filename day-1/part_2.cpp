@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 
-int main(int argc, char const *argv[])
+int main()
 {
     std::ifstream input("input.txt");
 
@@ -27,8 +27,8 @@ int main(int argc, char const *argv[])
     for (size_t i = 0; i < first_num_list.size(); i++)
     {
         int found_times = 0;
-        auto begin = std::find(second_num_list.begin(), second_num_list.end(),
-                               first_num_list[i]);
+        std::vector<int>::iterator begin = std::find(second_num_list.begin(), second_num_list.end(),
+                                                     first_num_list[i]);
 
         while (begin != second_num_list.end())
         {

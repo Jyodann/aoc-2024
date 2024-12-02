@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 
-int main(int argc, char const *argv[])
+int main()
 {
     std::ifstream input("input.txt");
 
