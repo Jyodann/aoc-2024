@@ -11,6 +11,11 @@ struct Rule
     int RightNo;
 };
 
+void PrintRule(const Rule rule)
+{
+    std::cout << rule.LeftNo << "|" << rule.RightNo << " ";
+}
+
 std::vector<int> split(const std::string &s, char delim)
 {
     std::vector<int> result;
@@ -105,12 +110,47 @@ int main()
             }
         }
 
-        if (perfectNo == numbers.size())
+        if (perfectNo != numbers.size())
         {
-            std::cout << "Perfect Match: " << line << std::endl;
-            std::cout << numbers[numbers.size() / 2] << std::endl;
+            std::cout << "Non Perfect Match: " << line << std::endl;
+            int *arr = new int[numbers.size()];
+            for (size_t i = 0; i < numbers.size(); i++)
+            {
+                int curr_no = numbers[i];
+                int rules_matched = 0;
+                std::vector<Rule> number_rules;
+                for (size_t r = 0; r < rules.size(); r++)
+                {
+                    Rule rule = rules[r];
+                    if (rule.LeftNo == curr_no)
+                    {
+                        number_rules.push_back(rule);
+                    }
+                }
 
-            total += numbers[numbers.size() / 2];
+                for (size_t r = 0; r < number_rules.size(); r++)
+                {
+                    Rule rule = number_rules[r];
+
+                    for (size_t n = 0; n < numbers.size(); n++)
+                    {
+                        int num_to_find = numbers[n];
+
+                        if (rule.RightNo == num_to_find)
+                        {
+                            rules_matched++;
+                        }
+                    }
+                }
+
+                // std::cout << std::endl;
+
+                arr[numbers.size() - 1 - rules_matched] = curr_no;
+            }
+
+            std::cout << arr[numbers.size() / 2] << std::endl;
+            total += arr[numbers.size() / 2];
+            delete arr;
         }
     }
 
